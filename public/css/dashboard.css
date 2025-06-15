@@ -1,0 +1,159 @@
+/* Dashboard Styles */
+:root {
+    --primary-gradient: linear-gradient(45deg, #4e73df, #224abe);
+    --success-gradient: linear-gradient(45deg, #1cc88a, #13855c);
+    --info-gradient: linear-gradient(45deg, #36b9cc, #258391);
+    --warning-gradient: linear-gradient(45deg, #f6c23e, #dda20a);
+}
+.stats-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+.stats-card.bg-primary { background: var(--primary-gradient) !important; }
+.stats-card.bg-success { background: var(--success-gradient) !important; }
+.stats-card.bg-info { background: var(--info-gradient) !important; }
+.stats-card.bg-warning { background: var(--warning-gradient) !important; }
+.stats-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.stats-card .card-body {
+    padding: 1.8rem;
+    position: relative;
+    z-index: 1;
+}
+.stats-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+.stats-card .display-4 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.activity-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+.activity-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+.activity-card .card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.2rem 1.5rem;
+    border-radius: 15px 15px 0 0;
+}
+.activity-card .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+}
+.activity-card .btn-primary {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.activity-card .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(78, 115, 223, 0.2);
+}
+.activity-card .table {
+    margin-bottom: 0;
+}
+.activity-card .table th {
+    border-top: none;
+    font-weight: 600;
+    color: #4a5568;
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+}
+.activity-card .table td {
+    padding: 1rem 1.5rem;
+    vertical-align: middle;
+    border-color: #f1f5f9;
+}
+.activity-card .table-hover tbody tr {
+    transition: all 0.2s ease;
+}
+.activity-card .table-hover tbody tr:hover {
+    background-color: #f8fafc;
+    transform: scale(1.01);
+}
+.badge {
+    padding: 0.6em 1em;
+    font-weight: 500;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+.empty-state {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+.empty-state i {
+    font-size: 3rem;
+    color: #cbd5e0;
+    margin-bottom: 1rem;
+}
+.empty-state p {
+    color: #718096;
+    font-size: 1.1rem;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .stats-card .display-4 {
+        font-size: 2.2rem;
+    }
+    .stats-card .card-body {
+        padding: 1.5rem;
+    }
+    .activity-card {
+        margin-bottom: 1rem;
+    }
+    .activity-card .table th,
+    .activity-card .table td {
+        padding: 0.75rem 1rem;
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.stats-card, .activity-card {
+    animation: fadeIn 0.5s ease-out;
+}
+.tooltip {
+    font-size: 0.875rem;
+}
+.tooltip-inner {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.text-decoration-none {
+    color: #4a5568;
+    transition: all 0.2s ease;
+}
+.text-decoration-none:hover {
+    color: #2b6cb0;
+    text-decoration: none;
+}
+.spinner-border {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+} 
