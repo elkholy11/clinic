@@ -34,7 +34,7 @@
                             <td>{{ $doctor->phone }}</td>
                         </tr>
                         <tr>
-                            <th>{{ __('messages.specialization') }}</th>
+                            <th>{{ __('messages.specialty') }}</th>
                             <td>{{ $doctor->specialty }}</td>
                         </tr>
                         <tr>
