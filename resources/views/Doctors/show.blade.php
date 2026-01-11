@@ -217,10 +217,15 @@
                             <td>{{ $doctor->phone }}</td>
                         </tr>
                         <tr>
+<<<<<<< HEAD
                             <th><i class="fas fa-stethoscope me-2 text-muted"></i>{{ __('messages.specialty') }}:</th>
                             <td>
                                 <span class="badge bg-info">{{ $doctor->specialty }}</span>
                             </td>
+=======
+                            <th>{{ __('messages.specialty') }}</th>
+                            <td>{{ $doctor->specialty }}</td>
+>>>>>>> f33f2232176085b0a90bb4c33ebccb726a021b05
                         </tr>
                         <tr>
                             <th><i class="fas fa-map-marker-alt me-2 text-muted"></i>{{ __('messages.address') }}:</th>
@@ -293,4 +298,8 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection 
+>>>>>>> f33f2232176085b0a90bb4c33ebccb726a021b05

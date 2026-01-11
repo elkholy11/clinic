@@ -273,7 +273,10 @@
                             <th>{{ __('messages.email') }}</th>
                             <th>{{ __('messages.phone') }}</th>
                             <th>{{ __('messages.specialty') }}</th>
+<<<<<<< HEAD
                             <th>{{ __('messages.address') }}</th>
+=======
+>>>>>>> f33f2232176085b0a90bb4c33ebccb726a021b05
                             <th>{{ __('messages.actions') }}</th>
                         </tr>
                     </thead>
