@@ -16,14 +16,22 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        // Use validated data from LoginRequest
+        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $user = Auth::user();
+            
+            // If user is admin, redirect to admin login
+            if ($user->isAdmin()) {
+                Auth::logout();
+                return redirect()->route('admin.login')
+                    ->with('error', 'Please use the admin login page to access the admin panel.');
+            }
+
+            // Regular user - allow login
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended(route('user.dashboard'));
         }
 
         return back()->withErrors([

@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'doctor_id',
+        'is_admin',
     ];
 
     /**
@@ -41,5 +43,41 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
     ];
+
+    /**
+     * Get the doctor associated with the user.
+     * Note: Kept for backward compatibility. In new system, doctors don't have user accounts.
+     */
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+
+    /**
+     * Get the patient profile associated with the user.
+     */
+    public function patient()
+    {
+        return $this->hasOne(Patient::class);
+    }
+
+    /**
+     * Check if user is a doctor.
+     * Note: This is kept for backward compatibility with Doctor model relationships.
+     * In the new system, doctors are managed separately and don't have user accounts.
+     */
+    public function isDoctor()
+    {
+        return $this->doctor_id !== null;
+    }
+
+    /**
+     * Check if user is an admin.
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin === true;
+    }
 }

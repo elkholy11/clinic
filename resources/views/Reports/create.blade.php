@@ -9,7 +9,7 @@
             <h2>{{ __('messages.create_report') }}</h2>
         </div>
         <div class="col-md-6 text-end">
-            <a href="{{ route('reports.index') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.reports.index') }}" class="btn btn-secondary">
                 {{ __('messages.back_to_list') }}
             </a>
         </div>
@@ -17,7 +17,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('reports.store') }}" method="POST" class="needs-validation" novalidate>
+            <form action="{{ route('admin.reports.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
 
                 <div class="mb-3">
@@ -84,7 +84,7 @@
 
                 <div class="text-end">
                     <button type="submit" class="btn btn-primary">{{ __('messages.create') }}</button>
-                    <a href="{{ route('reports.index') }}" class="btn btn-secondary">{{ __('messages.cancel') }}</a>
+                    <a href="{{ route('admin.reports.index') }}" class="btn btn-secondary">{{ __('messages.cancel') }}</a>
                 </div>
             </form>
         </div>

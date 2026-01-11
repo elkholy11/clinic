@@ -34,6 +34,12 @@ class ProfileController extends Controller
 
         // Update password if provided
         if ($request->filled('password')) {
+            // Verify current password if provided
+            if ($request->filled('current_password')) {
+                if (!Hash::check($request->current_password, $user->password)) {
+                    return back()->withErrors(['current_password' => __('messages.current_password_incorrect')]);
+                }
+            }
             $user->password = Hash::make($request->password);
         }
 

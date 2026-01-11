@@ -2,86 +2,167 @@
 
 @section('title', __('messages.add_patient'))
 
+@push('styles')
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 1.75rem 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 20px rgba(79, 172, 254, 0.15);
+    }
+    
+    .page-header h2 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.75rem;
+    }
+    
+    .form-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #4facfe;
+        box-shadow: 0 0 0 0.2rem rgba(79, 172, 254, 0.25);
+    }
+    
+    .btn-submit {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        border: none;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        color: white;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <h2>{{ __('messages.add_patient') }}</h2>
-        </div>
-        <div class="col-md-6 text-end">
-            <a href="{{ route('patients.index') }}" class="btn btn-secondary">
-                {{ __('messages.back_to_list') }}
-            </a>
+    <div class="page-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2><i class="fas fa-user-plus me-2"></i>{{ __('messages.add_patient') }}</h2>
+            </div>
+            <div>
+                <a href="{{ route('admin.patients.index') }}" class="btn btn-light">
+                    <i class="fas fa-arrow-left me-2"></i>{{ __('messages.back_to_list') }}
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="card">
+    <div class="card form-card">
         <div class="card-body">
-            <form action="{{ route('patients.store') }}" method="POST" class="needs-validation" novalidate>
+            <form action="{{ route('admin.patients.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
 
-                <div class="mb-3">
-                    <label for="name" class="form-label">{{ __('messages.name') }}</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">{{ __('messages.name') }}</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                            @error('name')
+                                <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">{{ __('messages.email') }}</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">{{ __('messages.email') }}</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">{{ __('messages.phone') }}</label>
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}">
+                            @error('phone')
+                                <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="date_of_birth" class="form-label">{{ __('messages.date_of_birth') }}</label>
+                            <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror" id="date_of_birth" name="birth_date" value="{{ old('birth_date') }}">
+                            @error('date_of_birth')
+                                <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="phone" class="form-label">{{ __('messages.phone') }}</label>
-                    <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required>
-                    @error('phone')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">{{ __('messages.gender') }}</label>
+                            <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender">
+                                <option value="">{{ __('messages.select_gender') }}</option>
+                                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>{{ __('messages.male') }}</option>
+                                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>{{ __('messages.female') }}</option>
+                            </select>
+                            @error('gender')
+                                <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="date_of_birth" class="form-label">{{ __('messages.date_of_birth') }}</label>
-                    <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
-                    @error('date_of_birth')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="gender" class="form-label">{{ __('messages.gender') }}</label>
-                    <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender" required>
-                        <option value="">{{ __('messages.select_gender') }}</option>
-                        <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>{{ __('messages.male') }}</option>
-                        <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>{{ __('messages.female') }}</option>
-                    </select>
-                    @error('gender')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="blood_type" class="form-label">{{ __('messages.blood_type') }}</label>
-                    <select class="form-select @error('blood_type') is-invalid @enderror" id="blood_type" name="blood_type" required>
-                        <option value="">{{ __('messages.select_blood_type') }}</option>
-                        @foreach(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] as $type)
-                            <option value="{{ $type }}" {{ old('blood_type') == $type ? 'selected' : '' }}>{{ $type }}</option>
-                        @endforeach
-                    </select>
-                    @error('blood_type')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="blood_type" class="form-label">{{ __('messages.blood_type') }}</label>
+                            <select class="form-select @error('blood_type') is-invalid @enderror" id="blood_type" name="blood_type">
+                                <option value="">{{ __('messages.select_blood_type') }}</option>
+                                @foreach(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] as $type)
+                                    <option value="{{ $type }}" {{ old('blood_type') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                                @endforeach
+                            </select>
+                            @error('blood_type')
+                                <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">{{ __('messages.address') }}</label>
-                    <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="3" required>{{ old('address') }}</textarea>
+                    <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="3">{{ old('address') }}</textarea>
                     @error('address')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">
+                            <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                        </div>
                     @enderror
                 </div>
 
@@ -89,7 +170,9 @@
                     <label for="allergies" class="form-label">{{ __('messages.allergies') }}</label>
                     <textarea class="form-control @error('allergies') is-invalid @enderror" id="allergies" name="allergies" rows="3">{{ old('allergies') }}</textarea>
                     @error('allergies')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">
+                            <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                        </div>
                     @enderror
                 </div>
 
@@ -97,13 +180,19 @@
                     <label for="medical_conditions" class="form-label">{{ __('messages.medical_conditions') }}</label>
                     <textarea class="form-control @error('medical_conditions') is-invalid @enderror" id="medical_conditions" name="medical_conditions" rows="3">{{ old('medical_conditions') }}</textarea>
                     @error('medical_conditions')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">
+                            <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                        </div>
                     @enderror
                 </div>
 
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary">{{ __('messages.create') }}</button>
-                    <a href="{{ route('patients.index') }}" class="btn btn-secondary">{{ __('messages.cancel') }}</a>
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-save me-2"></i>{{ __('messages.create') }}
+                    </button>
+                    <a href="{{ route('admin.patients.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-times me-2"></i>{{ __('messages.cancel') }}
+                    </a>
                 </div>
             </form>
         </div>

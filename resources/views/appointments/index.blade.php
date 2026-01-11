@@ -2,29 +2,208 @@
 
 @section('title', __('messages.appointments'))
 
+@push('styles')
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 1.75rem 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 20px rgba(67, 233, 123, 0.15);
+    }
+    
+    .page-header h2 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.75rem;
+    }
+    
+    .table-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        overflow: hidden;
+        background: white;
+    }
+    
+    .table-card .card-body {
+        padding: 0;
+    }
+    
+    .table {
+        margin-bottom: 0;
+        background: white;
+    }
+    
+    .table thead {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+    }
+    
+    .table thead th {
+        border: none;
+        padding: 1.25rem 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.8px;
+        white-space: nowrap;
+    }
+    
+    .table tbody tr {
+        transition: all 0.25s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .table tbody tr:last-child {
+        border-bottom: none;
+    }
+    
+    .table tbody tr:hover {
+        background: linear-gradient(90deg, rgba(67, 233, 123, 0.05) 0%, rgba(56, 249, 215, 0.05) 100%);
+        transform: translateX(2px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    
+    .table tbody td {
+        padding: 1.5rem 1rem;
+        vertical-align: middle;
+        border-top: none;
+        color: #495057;
+        font-size: 0.95rem;
+    }
+    
+    .table tbody td:first-child {
+        font-weight: 600;
+        color: #212529;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .action-buttons {
+        flex-wrap: nowrap;
+    }
+    
+    .action-buttons .btn {
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .action-buttons .btn:hover {
+        transform: translateY(-3px) scale(1.08);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+    
+    .action-buttons .btn:active {
+        transform: translateY(-1px) scale(1.03);
+    }
+    
+    .action-buttons .btn-info {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+    }
+    
+    .action-buttons .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .action-buttons .btn-danger {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }
+    
+    .btn-add {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        border: none;
+        color: white;
+        padding: 0.875rem 1.75rem;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(67, 233, 123, 0.3);
+    }
+    
+    .btn-add:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(67, 233, 123, 0.4);
+        color: white;
+    }
+    
+    .badge {
+        padding: 0.5rem 0.75rem;
+        font-weight: 500;
+        border-radius: 6px;
+    }
+    
+    .empty-state {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(67, 233, 123, 0.02) 0%, rgba(56, 249, 215, 0.02) 100%);
+    }
+    
+    .empty-state i {
+        opacity: 0.2;
+        margin-bottom: 1.5rem;
+        color: #43e97b;
+    }
+    
+    .empty-state h5 {
+        color: #6c757d;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    
+    .card-footer {
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        padding: 1.25rem;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <h2>{{ __('messages.appointments') }}</h2>
-        </div>
-        <div class="col-md-6 text-end">
-            <a href="{{ route('appointments.create') }}" class="btn btn-primary">
-                {{ __('messages.add_appointment') }}
-            </a>
+    <div class="page-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2><i class="fas fa-calendar-check me-2"></i>{{ __('messages.appointments') }}</h2>
+            </div>
+            <div>
+                <a href="{{ route('admin.appointments.create') }}" class="btn btn-add">
+                    <i class="fas fa-plus me-2"></i>{{ __('messages.add_appointment') }}
+                </a>
+            </div>
         </div>
     </div>
 
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
 
-    <div class="card">
+    <div class="card table-card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>{{ __('messages.patient') }}</th>
@@ -41,41 +220,58 @@
                                 <td>{{ $appointment->patient->name }}</td>
                                 <td>{{ $appointment->doctor->name }}</td>
                                 <td>{{ $appointment->appointment_date }}</td>
-                                <td>{{ $appointment->appointment_time }}</td>
+                                <td>{{ $appointment->appointment_time ?? '-' }}</td>
                                 <td>
                                     <span class="badge bg-{{ $appointment->status === 'completed' ? 'success' : ($appointment->status === 'cancelled' ? 'danger' : 'warning') }}">
                                         {{ __('messages.' . $appointment->status) }}
                                     </span>
                                 </td>
                                 <td>
-                                     <a href="{{ route('appointments.show', $appointment) }}" class="btn btn-info btn-sm" title="{{ __('messages.view') }}">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('appointments.edit', $appointment) }}" class="btn btn-primary btn-sm" title="{{ __('messages.edit') }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('appointments.destroy', $appointment) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="{{ __('messages.delete') }}" onclick="return confirm('{{ __('messages.are_you_sure') }}')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                
+                                    <div class="action-buttons">
+                                        @can('view', $appointment)
+                                        <a href="{{ route('admin.appointments.show', $appointment) }}" class="btn btn-info" title="{{ __('messages.view') }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        @endcan
+                                        @can('update', $appointment)
+                                        <a href="{{ route('admin.appointments.edit', $appointment) }}" class="btn btn-primary" title="{{ __('messages.edit') }}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        @endcan
+                                        @can('delete', $appointment)
+                                        <form action="{{ route('admin.appointments.destroy', $appointment) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" title="{{ __('messages.delete') }}" onclick="return confirm('{{ __('messages.are_you_sure') }}')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        @endcan
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">{{ __('messages.no_appointments_found') }}</td>
+                                <td colspan="6" class="empty-state">
+                                    <i class="fas fa-calendar-check fa-4x text-muted mb-3"></i>
+                                    <h5 class="text-muted mb-2">{{ __('messages.no_appointments_found') }}</h5>
+                                    <a href="{{ route('admin.appointments.create') }}" class="btn btn-add mt-3">
+                                        <i class="fas fa-plus me-2"></i>{{ __('messages.add_appointment') }}
+                                    </a>
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
 
-            <div class="d-flex justify-content-center mt-4">
-                {{ $appointments->links() }}
+            @if($appointments->hasPages())
+            <div class="card-footer">
+                <div class="d-flex justify-content-center">
+                    {{ $appointments->links() }}
+                </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

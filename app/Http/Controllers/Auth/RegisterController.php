@@ -13,25 +13,33 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
+        // If already logged in, redirect to dashboard
+        if (Auth::check()) {
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('user.dashboard');
+        }
+
         return view('auth.register');
     }
 
     public function register(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $validated = $request->validated();
 
+        // Create regular user account (not admin)
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'is_admin' => false, // Users cannot register as admin
+            'doctor_id' => null, // Not linked to doctor in new system
         ]);
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('user.dashboard')
+            ->with('success', __('messages.registration_successful'));
     }
 } 
